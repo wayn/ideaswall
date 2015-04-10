@@ -1,8 +1,50 @@
 
 body {
-  font: 13px Helvetica, arial, freesans, clean, sans-serif;
-  line-height: 1.4;
-  color: #333333;
-  background: #fff;
-  padding: 50px;
+	font: 13px Helvetica, arial, freesans, clean, sans-serif;
+	line-height: 1.4;
+	color: #333333;
+	background: #fff;
+}
+
+header.fullSize {
+	background: #4c5264;
+	position: fixed;
+	height: 80px;
+	z-index: 10000;
+	min-width: 90%;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.container {
+	padding-top: 81px;
+	width: 100%;
+}
+
+.logo {
+	display: inline-block;
+	height: 80px;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	-o-box-flex: 1;
+	box-flex: 1;
+	-webkit-flex: 0 0 80px;
+	-ms-flex: 0 0 80px;
+	flex: 0 0 80px;
+	width: 80px;
+}
+
+.logo a {
+	position: absolute;
+  	top: 0;
+  	left: 0;
+  	height: 100%;
+  	width: 100%;
+  	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: none;
+	border: 0 none;
+	background: url("https://apiary.a.ssl.fastly.net/assets/images/apiary-app-logo-1x-136bf1f4d06a3c9e.png") 23px center no-repeat
 }
