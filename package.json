@@ -44,8 +44,5 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/madhums/node-express-mongoose.git"
-  },
-  "keywords": [
-    "api management",
-  ]
+  }
 }
