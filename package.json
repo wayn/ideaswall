@@ -1,10 +1,10 @@
 {
-  "name": "node-express-mongoose",
-  "description": "A boilerplate application for express mongoose",
+  "name": "ideaswall",
+  "description": "An api management platform",
   "version": "1.0.0",
   "author": {
-    "name": "Madhusudhan Srinivasa",
-    "email": "me@madhums.me"
+    "name": "Wayn Liu",
+    "email": "wayn@ideaswall.com"
   },
   "engines": {
     "node": "0.10.x"
@@ -46,7 +46,6 @@
     "url": "git://github.com/madhums/node-express-mongoose.git"
   },
   "keywords": [
-    "mvc",
-    "boilerplate"
+    "api management",
   ]
 }
