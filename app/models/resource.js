@@ -11,6 +11,7 @@ var Schema = mongoose.Schema;
  */
 
 var ResourceSchema = new Schema({
+  bucket: { type: Schema.ObjectId, ref: 'Bucket' },
   name: { type: String, default: '' },
   endpoint: { type: String, default: '' },
   method: { type: String, default: '' },
@@ -38,7 +39,7 @@ ResourceSchema.methods = {
 	/**
 	 * Save resource
    *
-   * @param {Object} images
+   * @param {Object} request
    * @param {Function} cb
    * @api private
    */
