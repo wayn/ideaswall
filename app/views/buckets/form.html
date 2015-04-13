@@ -16,8 +16,6 @@
     <div class="col-md-8">
       <form method="post" action="{{ action }}" role="form" class="form-horizontal">
 
-        {# <input type="hidden" name="_csrf" value="{{ csrf_token }}"> #}
-
         {% if not bucket.isNew %}
           <input type="hidden" name="_method" value="PUT">
         {% endif %}

@@ -44,12 +44,13 @@ ResourceSchema.methods = {
    * @api private
    */
 
-  save: function (request, cb) {
+  addResource: function (request, cb) {
   	// Parse request
+    var self = this; 
   	this.validate(function (err) {
   		if (err) return cb(err);
-  		self.request = { type : '', header : '', body : ''};
-  		self.save();
+  		// self.request = { type : '', header : '', body : ''};
+  		self.save(cb);
   	});
   },
 

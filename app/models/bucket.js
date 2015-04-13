@@ -78,6 +78,16 @@ BucketSchema.statics = {
 
     this.find(criteria)
       .exec(cb);
+  },
+
+  /**
+   * Find last buckets
+   *
+   * @param {Function} cb
+   * @api private
+   */
+  last: function (cb) {
+    this.find().sort({'createAt' : -1}).limit(1).exec(cb);
   }
 }
 

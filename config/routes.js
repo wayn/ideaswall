@@ -17,13 +17,16 @@ module.exports = function (app, passport) {
     app.get('/', home.index);
 
     // resource routes
+    app.param('resourceId', resources.load);
     app.get('/resources/new', resources.new);
+    app.post('/resources', resources.create);
+    app.get('/resources/:resourceId', resources.show);
 
     // bucket routes
-    app.param('id', buckets.load);
+    app.param('bucketId', buckets.load);
     app.get('/buckets/new', buckets.new);
     app.post('/buckets', buckets.create);
-    app.get('/buckets/:id', buckets.show);
+    app.get('/buckets/:bucketId', buckets.show);
 
     /**
     * Error handling

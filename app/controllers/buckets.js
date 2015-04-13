@@ -12,13 +12,18 @@ var extend = require('util')._extend
  * Load
  */
 
-exports.load = function (req, res, next, id){
+exports.load = function (req, res, next, id) {
 
+  console.log(req);
   Bucket.load(id, function (err, bucket) {
+    console.log(bucket);
     if (err) return next(err);
     if (!bucket) return next(new Error('not found'));
+
     req.bucket = bucket;
+
     next();
+
   });
 };
 
@@ -26,7 +31,7 @@ exports.load = function (req, res, next, id){
  * New bucket
  */
 
-exports.new = function (req, res){
+exports.new = function (req, res) {
   res.render('buckets/form', {
     title: 'New Bucket',
     bucket: new Bucket({})
@@ -43,7 +48,6 @@ exports.create = function (req, res) {
   bucket.name = req.body.name;
   bucket.addBucket(function (err) {
     if (!err) {
-      console.log(bucket.name);
       req.flash('success', 'Successfully created bucket!');
       return res.redirect('/buckets/'+bucket._id);
     }
@@ -61,6 +65,7 @@ exports.create = function (req, res) {
  */
 
 exports.show = function (req, res){
+  console.log(req);
   res.render('buckets/bucket', {
     title: req.bucket.name,
     bucket: req.bucket
