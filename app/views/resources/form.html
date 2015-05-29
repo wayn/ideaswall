@@ -2,7 +2,6 @@
 
 {% block main %}
   <h1>{{ title }}</h1>
-  <hr>
 {% endblock %}
 
 {% block content %}
@@ -12,67 +11,109 @@
     {% set action = '/resources/' + resource._id %}
   {% endif %}
 
+  <section id="request">
   <div class="row">
     <div class="col-md-8">
-      <form method="post" action="{{ action }}" role="form" class="form-horizontal">
+      <form method="post" action="{{ action }}" role="form" class="resource form-horizontal">
 
         {% if not resource.isNew %}
           <input type="hidden" name="_method" value="PUT">
         {% endif %}
 
-        <div class="form-group">
-          <label for="name" class="col-sm-2 control-label">Name</label>
-          <div class="col-sm-10">
-            <input type="text" name="name" value="{{ resource.name }}" placeholder="Enter the name" class="form-control" id="name">
-          </div>
+        <div id="request-url" class="clearfix form-group">
+            <div id="request-url-wrapper">
+                <div id="request-url-container">
+                    <input type="text" name="endpoint" id="url" tabindex="1" class="input-text-light"
+                           placeholder="Enter request URL here"/>
+                </div>
+            </div>
+            <div id="request-modifiers">
+                <div id="request-method-container">
+                    <select id="request-method-selector">
+                        <option value="GET" selected>GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="COPY">COPY</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="OPTIONS">OPTIONS</option>
+                        <option value="LINK">LINK</option>
+                        <option value="UNLINK">UNLINK</option>
+                        <option value="PURGE">PURGE</option>
+                    </select>
+                </div>
+                <div id="request-url-buttons-container">
+                    <button class="btn"
+                            id="url-keyvaleditor-actions-open"><i
+                            class="icon-edit"></i> URL params
+                    </button>
+                    <button class="btn"
+                            id="headers-keyvaleditor-actions-open"><i
+                            class="icon-edit"></i> Headers (<span class="headers-count">0</span>)
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
-        <div class="form-group">
-          <label for="endpoint" class="col-sm-2 control-label">Endpoint</label>
-          <div class="col-sm-3 dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-              Dropdown
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Get</a></li>
-              <li><a href="#">Post</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-7">
-            <input type="text" name="endpoint" value="{{ resource.endpoint }}" placeholder="Enter the endpoint" class="form-control" id="endpoint">
-          </div>
+        <div id="headers-keyvaleditor-container" class="row clearfix form-group" style="margin-left: 0px; display: none;">
+            <div class="keyvaleditor-left">
+                <div id="headers-keyvaleditor"></div>
+            </div>
+            <div class="keyvaleditor-right">
+                <div id="headers-keyvaleditor-actions">
+                    <input type="button" id="headers-keyvaleditor-actions-manage-presets"
+                           class="btn"
+                           rel="popover"
+                           data-trigger="hover"
+                           data-placement="bottom" data-content="Presets let you define groups of headers for quick addition" data-original-title="Header presets"
+                           value="Manage presets"/><br/>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-          <label for="headers" class="col-sm-2 control-label">Headers</label>
-          <div class="col-sm-3">
-            <input type="text" name="name" value="{{ resource.name }}" placeholder="Enter the name" class="form-control" id="name">
-          </div>
-          <div class="col-sm-7">
-            <input type="text" name="value" value="{{ resource.value }}" placeholder="Enter the value" class="form-control" id="value">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="headers" class="col-sm-2 control-label"></label>
-          <div class="col-sm-3">
-            <input type="text" name="name" value="{{ resource.name }}" placeholder="Enter the name" class="form-control" id="name">
-          </div>
-          <div class="col-sm-7">
-            <input type="text" name="value" value="{{ resource.value }}" placeholder="Enter the value" class="form-control" id="value">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="desc" class="col-sm-2 control-label">Body</label>
-          <div class="col-sm-10">
-            <textarea rows="5" name="body" placeholder="Enter the article description" id="desc" cols="30" rows="10" class="form-control">{{ resource.body }}</textarea>
-          </div>
+        <div id="data" class="form-group">
+            <div class="clearfix">
+                <div id="data-mode-selector" class="btn-group clearfix"
+                     data-toggle="buttons-radio">
+                    <a class="btn" data-mode="params">form-data</a>
+                    <a class="btn" data-mode="urlencoded">x-www-form-urlencoded</a>
+                    <a class="btn" data-mode="raw">raw</a>
+                </div>
+                <div id="body-editor-mode-selector">
+                    <div class="btn-group">
+                        <a class="dropdown" data-toggle="dropdown">
+                            <span id="body-editor-mode-item-selected">Text</span>
+                            <span class="caret" style="margin-top: 8px;"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a data-editor-mode="text" data-language="text">Text</a></li>
+                            <li><a data-editor-mode="javascript" data-language="json">JSON</a></li>
+                            <li><a data-editor-mode="xml" data-language="xml">XML</a></li>
+                            <li><a data-editor-mode="xml" data-language="html">HTML</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="body-data-containers">
+                <div id="formdata-keyvaleditor-container" class="row" style="margin-left: 0;">
+                    <div id="formdata-keyvaleditor"></div>
+                </div>
+                <div id="urlencoded-keyvaleditor-container" class="row" style="margin-left: 0;">
+                    <div id="urlencoded-keyvaleditor"></div>
+                </div>
+                <div id="body-data-container">
+                    <textarea name="data" id="body" tabindex="4" class="inputText"></textarea>
+                    <pre id="body-editor-mode-selector-format-result">
+                    </pre>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn">Run</button>
             <button class="btn btn-primary" type="submit">Save</button>
             &nbsp;
             <a href="/resources" class="btn btn-link">Cancel</a>
@@ -81,4 +122,5 @@
       </form>
     </div>
   </div>
+  </section>
 {% endblock %}

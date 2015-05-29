@@ -48,9 +48,7 @@ exports.create = function (req, res) {
   var resource = new Resource(req.body);
   resource.name = req.body.name;
   resource.bucket = req.session.bucket;
-  console.log(resource);
   resource.addResource(req, function (err) {
-  	console.log(req);
     if (!err) {
       req.flash('success', 'Successfully created resource!');
       return res.redirect('/resources/'+resource._id);

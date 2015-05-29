@@ -107,3 +107,7 @@ header.fullSize {
 .pull-right {
   float: right;
 }
+
+.resource #name {
+	margin-right: 380px;
+}
